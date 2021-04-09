@@ -2,8 +2,7 @@ package net.simplifiedcoding.data
 
 import android.os.Parcelable
 import androidx.annotation.Keep
-import kotlinx.parcelize.Parcelize
-
+import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 @Keep
