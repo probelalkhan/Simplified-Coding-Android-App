@@ -1,6 +1,5 @@
 package net.simplifiedcoding.ui
 
-import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import net.simplifiedcoding.R
 
