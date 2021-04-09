@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import net.simplifiedcoding.data.Course
 import net.simplifiedcoding.databinding.ItemCourseBinding
 import net.simplifiedcoding.ui.base.BaseRecyclerViewAdapter
+import net.simplifiedcoding.ui.utils.bindImage
 
 class CoursesAdapter : BaseRecyclerViewAdapter<Course, ItemCourseBinding>() {
 
@@ -14,8 +15,10 @@ class CoursesAdapter : BaseRecyclerViewAdapter<Course, ItemCourseBinding>() {
         holder: Companion.BaseViewHolder<ItemCourseBinding>,
         position: Int
     ) {
+        super.onBindViewHolder(holder, position)
         items?.let {
             holder.binding.textView.text = it[position].title
+            holder.binding.imageView.bindImage(it[position].featured_image)
         }
     }
 }
