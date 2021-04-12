@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import net.simplifiedcoding.R
+import net.simplifiedcoding.data.Resource
 import net.simplifiedcoding.data.network.RetrofitClient
 import net.simplifiedcoding.data.network.SimplifiedCodingApi
 import net.simplifiedcoding.data.repositories.CoursesRepository
@@ -38,8 +39,18 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
             Toast.makeText(requireContext(), "$item", Toast.LENGTH_SHORT).show()
         }
 
-        viewModel.latestCoursesLiveData.observe(viewLifecycleOwner) {
-            coursesAdapter.items = it.courses
+        viewModel.latestCoursesLiveData.observe(viewLifecycleOwner) { resource ->
+            when (resource) {
+                is Resource.Success -> {
+                    coursesAdapter.items = resource.data?.courses
+                }
+                is Resource.Failure -> {
+                    Toast.makeText(requireContext(), "Failure", Toast.LENGTH_SHORT).show()
+                }
+                is Resource.Loading -> {
+
+                }
+            }
         }
     }
 }

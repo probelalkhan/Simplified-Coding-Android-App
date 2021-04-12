@@ -6,7 +6,7 @@ import net.simplifiedcoding.data.repositories.CoursesRepository
 
 class HomeFragmentViewModelFactory(
         private val repository: CoursesRepository
-) : ViewModelProvider.NewInstanceFactory() {
+) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
        return HomeFragmentViewModel(repository) as T
