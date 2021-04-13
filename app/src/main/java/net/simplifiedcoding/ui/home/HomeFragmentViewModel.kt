@@ -4,13 +4,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import net.simplifiedcoding.data.LatestCoursesResponse
 import net.simplifiedcoding.data.Resource
 import net.simplifiedcoding.data.repositories.CoursesRepository
+import javax.inject.Inject
 
-class HomeFragmentViewModel(
-        private val coursesRepository: CoursesRepository
+@HiltViewModel
+class HomeFragmentViewModel @Inject constructor(
+    private val coursesRepository: CoursesRepository
 ) : ViewModel() {
 
     val latestCoursesLiveData: LiveData<Resource<LatestCoursesResponse>>
