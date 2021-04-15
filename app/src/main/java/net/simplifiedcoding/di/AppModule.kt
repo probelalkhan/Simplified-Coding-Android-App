@@ -1,9 +1,12 @@
 package net.simplifiedcoding.di
 
+import android.content.Context
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import net.simplifiedcoding.data.db.SimplifiedCodingDatabase
 import net.simplifiedcoding.data.network.RetrofitClient
 import net.simplifiedcoding.data.network.SimplifiedCodingApi
 import net.simplifiedcoding.data.repositories.CoursesRepository
@@ -32,5 +35,13 @@ object AppModule {
         api: SimplifiedCodingApi
     ): CoursesRepository {
         return CoursesRepository(api)
+    }
+
+    @Singleton
+    @Provides
+    fun provideSimplifiedCodingDatabase(
+        @ApplicationContext context: Context
+    ): SimplifiedCodingDatabase {
+        return SimplifiedCodingDatabase(context)
     }
 }

@@ -71,4 +71,11 @@ dependencies {
 
     implementation "com.google.dagger:hilt-android:2.33-beta"
     kapt "com.google.dagger:hilt-compiler:2.33-beta"
+
+    implementation "androidx.room:room-runtime:2.2.6"
+    kapt "androidx.room:room-compiler:2.2.6"
+
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:2.2.6"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 }

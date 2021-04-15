@@ -6,7 +6,6 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import net.simplifiedcoding.R
-import net.simplifiedcoding.data.Resource
 import net.simplifiedcoding.databinding.FragmentHomeBinding
 import net.simplifiedcoding.ui.base.BaseFragment
 
@@ -31,18 +30,16 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
             Toast.makeText(requireContext(), "$item", Toast.LENGTH_SHORT).show()
         }
 
-        viewModel.latestCoursesLiveData.observe(viewLifecycleOwner) { resource ->
-            when (resource) {
-                is Resource.Success -> {
-                    courseAdapter.items = resource.data?.courses
-                }
-                is Resource.Failure -> {
-                    Toast.makeText(requireContext(), "Failure", Toast.LENGTH_SHORT).show()
-                }
-                is Resource.Loading -> {
+        viewModel.latestCoursesLiveData.observe(viewLifecycleOwner) { courses ->
+            courseAdapter.items = courses
+        }
 
-                }
-            }
+        viewModel.loading.observe(viewLifecycleOwner) { loading ->
+            binding.swipeRefreshLayout.isRefreshing = loading
+        }
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            viewModel.getLatestCourses(true)
         }
     }
 }
